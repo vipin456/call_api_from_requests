@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project>
+    <project-option name="id" value="17467" />
+    <project-field name="ACCOUNT_ID" value="1368" />
+    <project-field name="RERUN_CURRENT" value="0" />
+    <project-field name="OUT_FILE_BASE" value="/output" />
+    <project-field name="DESC_CODE_SHOW" value="" />
+    <project-field name="ACCOUNT" value="Jon" />
+    <project-field name="SPECIALRATES" value="1" />
+    <project-global name="GLOBAL_ORG" value="ABCD" />
+    <project-global name="RESTRICTED_RATE_FILTER" value="1" />
+    <script name="/demo/abc.py" />
+</project>

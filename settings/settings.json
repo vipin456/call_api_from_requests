@@ -1,0 +1,17 @@
+{
+  "azure_bucket": "streaming",
+  "docker_status": "not_running", 
+  "docker_image": "Version-web2.230.23",
+  "proxy_manager": "http://www.abc.com",
+  "data_exporter": "http://127.0.0.1:8080",
+  "base_dir": "C:\\Users\\vipin_sharma\\python\\24_Jan_2025",
+  "log_dir": "logs",
+  "output_dir": "output",
+  "snapshot_dir": "snapshot",
+  "temp_dir": "temp",
+  "dev_mode": false,
+  "browser": "C:\\Users\\helm\\AppData\\Local\\Chromium\\Application\\chrome.exe",
+  "browser_list": {},
+  "headless_browser": true,
+  "workunit_completion_disabled": false
+}

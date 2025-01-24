@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Extract the countries...",
+        "type": "python",
+        "request": "launch",
+        "pythonPath": "${workspaceFolder}/venv/Scripts/python.exe", // Path to the virtual environment's python executable
+        "program": "${workspaceFolder}/main.py",
+        "args": [
+          "--input_file",
+          "inputs/in.csv",
+          "--manifest",
+          "resources/manifest.xml",
+          "--script",
+          "scripts/extract.py",
+          "--dev_mode",
+          "true",
+          "--settings",
+          "settings/settings.json"
+        ],
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}" // Set the PYTHONPATH to the workspace folder
+        },
+        "console": "integratedTerminal"
+      }
+    ]
+  }
+  
