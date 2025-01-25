@@ -56,7 +56,7 @@ def extract_all_details(country_data):
             'timezone': country_data.get('timezones', [None])[0],  # Timezone, or None if not available
             'map_link': country_data['maps']['googleMaps'],  # Map link
         }
-        logger.info(f"Successfully extracted details for {country_data['name']['common']}")
+        # logger.info(f"Successfully extracted details for {country_data['name']['common']}")
         return country_info
     except KeyError as e:
         logger.error(f"KeyError: Missing key {e} in country data.")
@@ -73,12 +73,12 @@ def transformation_function(countries):
             country_info = extract_all_details(country_data)
 
             if country_info:  # Only process valid country info
-                logger.info(f"Successfully extracted details.")
-                logger.info(f"Details for {country_info['name']} (Official: {country_info['name_official']}):")
+                # logger.info(f"Successfully extracted details.")
+                # logger.info(f"Details for {country_info['name']} (Official: {country_info['name_official']}):")
                 country_data_list.append(country_info)  # Add the country info to the list
-                for key, value in country_info.items():
-                    logger.info(f"{key}: {value}")
-                logger.info("-" * 50)
+                # for key, value in country_info.items():
+                    # logger.info(f"{key}: {value}")
+                # logger.info("-" * 50)
 
         # Convert the list of dictionaries to a Pandas DataFrame
         df = pd.DataFrame(country_data_list)

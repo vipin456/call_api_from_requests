@@ -1,0 +1,35 @@
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore virtual environments
+venv/
+env/
+*.env
+
+# Ignore IDE files (VSCode, PyCharm, etc.)
+.vscode/
+.idea/
+
+# Ignore OS-specific files (Mac, Windows)
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore test coverage reports
+.coverage
+nosetests.xml
+pytest*.xml
+*.cover
+
+# Ignore temporary files
+*.bak
+*.swp
+
+# Ignore package distribution files
+dist/
+build/
+*.egg-info/
