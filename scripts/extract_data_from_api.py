@@ -82,11 +82,13 @@ def transformation_function(countries):
 
         # Convert the list of dictionaries to a Pandas DataFrame
         df = pd.DataFrame(country_data_list)
+        df_filtered = df[(df['population'] > 10000000) & (df['languages'].apply(lambda x: 'eng' in x and x['eng'] == 'English'))]
+        # df_filtered = df[df['name'].str.contains('United', case=False, na=False)]
         logger.info("Finished processing data.")
         # Open the CSV file in append mode if it exists, otherwise in write mode
         mode = 'a' if file_exists else 'w'
         # Write DataFrame to CSV
-        df.to_csv(output_file, mode=mode, header=not file_exists, index=False, encoding='utf-8')
+        df_filtered.to_csv(output_file, mode=mode, header=not file_exists, index=False, encoding='utf-8')
         logger.info("Finished writing data to CSV.")
         return True
     except Exception as e:
