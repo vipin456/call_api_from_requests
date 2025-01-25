@@ -65,32 +65,39 @@ def extract_all_details(country_data):
 def transformation_function(countries):
     try:
         output_file = 'output/output.csv'
-        file_exists = False  # Set this to True if the file already exists
+
+        # Check if the output directory exists, if not, create it
+        if not os.path.exists('output'):
+            os.makedirs('output')
+
+        file_exists = os.path.exists(output_file)  # Check if the file already exists
         country_data_list = []
+
         # Process each country's data and store it in a list
         for country_data in countries:
             logger.info(f"Looping through fetching the country data.")
             country_info = extract_all_details(country_data)
 
             if country_info:  # Only process valid country info
-                # logger.info(f"Successfully extracted details.")
-                # logger.info(f"Details for {country_info['name']} (Official: {country_info['name_official']}):")
                 country_data_list.append(country_info)  # Add the country info to the list
-                # for key, value in country_info.items():
-                    # logger.info(f"{key}: {value}")
-                # logger.info("-" * 50)
 
         # Convert the list of dictionaries to a Pandas DataFrame
-        df = pd.DataFrame(country_data_list)
-        df_filtered = df[(df['population'] > 10000000) & (df['languages'].apply(lambda x: 'eng' in x and x['eng'] == 'English'))]
-        # df_filtered = df[df['name'].str.contains('United', case=False, na=False)]
-        logger.info("Finished processing data.")
-        # Open the CSV file in append mode if it exists, otherwise in write mode
-        mode = 'a' if file_exists else 'w'
-        # Write DataFrame to CSV
-        df_filtered.to_csv(output_file, mode=mode, header=not file_exists, index=False, encoding='utf-8')
-        logger.info("Finished writing data to CSV.")
-        return True
+        if country_data_list:
+            df = pd.DataFrame(country_data_list)
+            df_filtered = df[(df['population'] > 10000000) & (df['languages'].apply(lambda x: 'eng' in x and x['eng'] == 'English'))]
+
+            logger.info("Finished processing data.")
+
+            # Open the CSV file in append mode if it exists, otherwise in write mode
+            mode = 'a' if file_exists else 'w'
+            # Write DataFrame to CSV
+            df_filtered.to_csv(output_file, mode=mode, header=not file_exists, index=False, encoding='utf-8')
+            logger.info("Finished writing data to CSV.")
+            return True
+        else:
+            logger.warning("No valid country data to process.")
+            return False
+
     except Exception as e:
         logger.error(f"Error processing data: {e}")
         return False
