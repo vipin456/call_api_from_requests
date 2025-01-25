@@ -1,2 +1,0 @@
-2025-01-24 09:31:24,128 - WeatherDataLogger - INFO - Starting Weather Data Logger
-2025-01-24 09:31:24,128 - WeatherDataLogger - ERROR - Value Error: API key not found in environment variables
