@@ -71,8 +71,7 @@ def transformation_function(countries):
             os.makedirs('./output')
             logger.info("Created output directory.")
         else:
-            logger.info("Output directory already exists.")
-            
+            logger.info("Output directory already exists.")            
         file_exists = os.path.exists(output_file)  # Check if the file already exists
         logger.info(f"Output file exists: {file_exists}")
         country_data_list = []
