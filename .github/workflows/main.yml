@@ -33,4 +33,3 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/call_api_from_requests:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/call_api_from_requests:${{ github.sha }}
-
