@@ -51,7 +51,7 @@ def extract_all_details(country_data):
             'capital': country_data.get('capital', [None])[0],  # Capital, or None if not available
             'region': country_data.get('region', 'Unknown'),  # Region
             'population': country_data.get('population', 0),  # Population, default 0
-            'currency': country_data['currencies'].get('SHP', {}).get('name', 'No currency info'),  # Currency
+            'currency': country_data.get('currencies', {}).get('SHP', {}).get('name', 'No currency info'),  # Currency
             'flag': country_data['flags']['png'],  # Flag image URL
             'timezone': country_data.get('timezones', [None])[0],  # Timezone, or None if not available
             'map_link': country_data['maps']['googleMaps'],  # Map link
@@ -64,22 +64,29 @@ def extract_all_details(country_data):
 
 def transformation_function(countries):
     try:
-        output_file = 'output/output.csv'
+        output_file = './output/output.csv'
 
         # Check if the output directory exists, if not, create it
-        if not os.path.exists('output'):
-            os.makedirs('output')
-
+        if not os.path.exists('./output'):  # Use './output' for relative path
+            os.makedirs('./output')
+            logger.info("Created output directory.")
+        else:
+            logger.info("Output directory already exists.")
+            
         file_exists = os.path.exists(output_file)  # Check if the file already exists
+        logger.info(f"Output file exists: {file_exists}")
         country_data_list = []
-
+        counter = 1
         # Process each country's data and store it in a list
         for country_data in countries:
+            logger.info(f"Country data: {country_data.get('currencies', {}).get('SHP', {}).get('name', 'No currency info')}")
             logger.info(f"Looping through fetching the country data.")
             country_info = extract_all_details(country_data)
 
             if country_info:  # Only process valid country info
                 country_data_list.append(country_info)  # Add the country info to the list
+            counter += 1
+            logger.info(f"Processed {counter} countries.")
 
         # Convert the list of dictionaries to a Pandas DataFrame
         if country_data_list:
