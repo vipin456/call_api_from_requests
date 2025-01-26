@@ -80,7 +80,6 @@ def transformation_function(countries):
         # Process each country's data and store it in a list
         for country_data in countries:
             logger.info(f"Country data: {country_data.get('currencies', {}).get('SHP', {}).get('name', 'No currency info')}")
-            logger.info(f"Looping through fetching the country data.")
             country_info = extract_all_details(country_data)
 
             if country_info:  # Only process valid country info
