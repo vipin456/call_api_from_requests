@@ -32,7 +32,7 @@ jobs:
           push: true   # Push the image to Docker Hub
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/call_api_from_requests:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/call_api_from_requests:${{ github.sha }}  # Tag with commit SHA
+            ${{ secrets.DOCKERHUB_USERNAME }}/call_api_from_requests:${{ github.sha }}
 
       # Optional: If you have tests, you can add them here
       # - name: Run tests
