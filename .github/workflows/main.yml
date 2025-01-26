@@ -10,33 +10,29 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Set to Ubuntu-based runner for Docker Buildx compatibility
-    
+    runs-on: ubuntu-latest  # or windows-latest if you need a Windows environment
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3  # This will checkout the code from GitHub
-    
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v2  # Logs into Docker Hub
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-    
+
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2  # Set up Docker Buildx for building multi-platform images
+      uses: docker/setup-buildx-action@v2  # Setup Buildx to allow multi-platform builds
       with:
-        driver: buildx  # Set the Buildx driver to 'buildx'
+        version: latest  # Optionally specify a version if needed, but default should be fine
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2  # Log in to Docker Hub
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}  # Store username in GitHub Secrets
+        password: ${{ secrets.DOCKERHUB_TOKEN }}  # Store password (token) in GitHub Secrets
 
     - name: Build Docker image
       run: |
-        docker buildx build -t ${{ secrets.DOCKERHUB_USERNAME }}/call_api_from_requests:latest . --platform linux/amd64,linux/arm64 --push  # Build and push multi-platform image
+        docker buildx build -t ${{ secrets.DOCKERHUB_USERNAME }}/call_api_from_requests:latest .  # Build Docker image using Buildx
     
     - name: Push Docker image
       run: |
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/call_api_from_requests:latest  # Push the latest tag
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/call_api_from_requests:${{ github.sha }}  # Push with commit hash tag
-        
-    # (Optional) Run tests if needed
-    # - name: Run tests
-    #   run: |
-    #     pytest  # If you have tests set up
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/call_api_from_requests:latest  # Push latest tag to Docker Hub
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/call_api_from_requests:${{ github.sha }}  # Push commit hash tag to Docker Hub
+
