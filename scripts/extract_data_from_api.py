@@ -34,6 +34,7 @@ def fetch_data():
         response = requests.get(url, headers=headers)
         response.raise_for_status()  # Will raise an error for bad status codes (4xx, 5xx)
         logger.info("Successfully fetched data from the API.")
+        logger.info(f"Response status code: {response.status_code}")
         records = response.json()
         status = transformation_function(records)
         return status
